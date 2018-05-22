@@ -1,0 +1,53 @@
+<modification>
+    <name>Hips Checkout</name>
+    <version>1.0</version>
+    <link>http://www.opensourcetechnologies.com/</link>
+    <author>OpenSource Technologies</author>
+    <code>Hips_Checkout_OpenCart2.2 -1.0</code>
+
+    <file name="catalog/controller/checkout/checkout.php">
+    <operation>
+      <search position="after"><![CDATA[public function index() {]]></search>
+      <add><![CDATA[if($this->config->get('hips_checkout_status') && $this->cart->getTotal() >= $this->config->get('hips_total') && $this->config->get('hips_payment_type')=="full")
+            {           $this->response->redirect($this->url->link('payment/hips_checkout'));       
+    }]]></add>
+    </operation>
+  </file>
+  
+    <file path="catalog/controller/common/cart.php">
+        
+        <operation>
+            <search position="replace"><![CDATA[$data['checkout'] = $this->url->link('checkout/checkout', '', true);]]></search>
+          <add>
+            <![CDATA[if($this->config->get('hips_checkout_status') && $this->cart->getTotal() >= $this->config->get('hips_total') && $this->config->get('hips_payment_type')=="full")
+            { $data['checkout'] = $this->url->link('payment/hips_checkout', '', true);
+            }
+            else{$data['checkout'] = $this->url->link('checkout/checkout', '', true); }]]></add>
+            
+        </operation>
+    </file>
+
+    <file path="catalog/controller/common/header.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['checkout'] = $this->url->link('checkout/checkout', '', true);]]></search>
+      <add>
+        <![CDATA[if($this->config->get('hips_checkout_status') && $this->cart->getTotal() >= $this->config->get('hips_total') && $this->config->get('hips_payment_type')=="full")
+        { $data['checkout'] = $this->url->link('payment/hips_checkout', '', true);
+        }
+        else{$data['checkout'] = $this->url->link('checkout/checkout', '', true); }]]></add>
+        
+    </operation>
+    </file>
+
+    <file path="catalog/controller/checkout/cart.php">
+        <operation>
+            <search position="replace"><![CDATA[$data['checkout'] = $this->url->link('checkout/checkout', '', true);]]></search>
+      <add>
+        <![CDATA[if($this->config->get('hips_checkout_status') && $this->cart->getTotal() >= $this->config->get('hips_total') && $this->config->get('hips_payment_type')=="full")
+        { $data['checkout'] = $this->url->link('payment/hips_checkout', '', true);
+        }
+        else{$data['checkout'] = $this->url->link('checkout/checkout', '', true); }]]></add>
+        
+    </operation>
+    </file>
+</modification>
