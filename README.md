@@ -1,4 +1,4 @@
-<p align="center">![Hips Logotype](https://hips.com/logo.svg)</div>
+<p align="center"><img src="https://hips.com/logo.svg"></p>
 
 # Opencart 2.0 - 2.2 setup instructions
 
